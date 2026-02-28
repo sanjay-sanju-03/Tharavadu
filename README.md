@@ -1,146 +1,138 @@
 # 🏛️ Tharavad - Community Management System
 
-A modern, full-stack web application for managing Tharavad (family clan) membership and payments with a premium UI/UX design.
+A full-stack **MERN** web application for managing Tharavad (family clan) membership and payments. Specifically crafted with a **bespoke "Royal Heritage" UI design**, secure JWT authentication, real-time data from MongoDB Atlas, and a fully fluid, responsive architecture.
 
 ![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat-square&logo=react)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat-square&logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb)
+![JWT](https://img.shields.io/badge/Auth-JWT-000000?style=flat-square&logo=jsonwebtokens)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+
+---
 
 ## ✨ Features
 
-- **📊 Dashboard** - Real-time statistics with animated progress tracking
-- **👥 Members** - Complete member management (Add, Edit, Search)
-- **💳 Payments** - Track and update payment status for multiple years
-- **🔍 Search** - Instant search across all records
-- **🔐 Authentication** - Secure admin login system
+- **📊 Dashboard** — Real-time stats: total members, payments (done/pending), total collected, completion rate.
+- **👥 Members** — Full CRUD: Add, Edit, Delete members with cascaded payment cleanup.
+- **💳 Payments** — Track and toggle payment status per member per year (2023/2024/2025).
+- **🔍 Search** — Instant cross-filtering search across members and payments by name, ID, phone, or email.
+- **🔐 Authentication** — Secure login with bcrypt-hashed passwords and 7-day JWT tokens.
+- **🌐 URL Routing** — Real browser URL navigation (`/dashboard`, `/members`, `/payments`, `/search`).
+- **💾 Persistent Sessions** — JWT stored in localStorage; session survives page refresh.
+- **🗄️ Cloud Database** — All data stored permanently in MongoDB Atlas (no data loss on restart).
+- **🆕 Auto Payments** — Adding a new member auto-creates payment records for 2023, 2024, 2025.
 
-## 🎨 UI Highlights
+---
 
-- Premium gradient themes
-- Glassmorphism effects
-- Smooth animations & micro-interactions
-- Fully responsive design
-- Modern card-based layout
+## 🎨 UI Highlights: "Royal Heritage Theme"
 
-## 🛠️ Tech Stack
+- **Bespoke Split-Card Login Screen:** A stunning, CSS-animated central floating card featuring a deep "Temple Red" gradient branding side, merging seamlessly into a premium cream login form.
+- **Rich Micro-Interactions:** Custom `fadeUp` staggers, pulsed gold ring animations around the logo, and tactile button hover lift mechanics.
+- **Glassmorphism:** Elegant use of `backdrop-filter: blur()` to soften the edges between UI elements and the rich background gradients.
+- **Fully Responsive:** Custom `@media` breakpoints stack the split-screen seamlessly on mobile without losing the luxury aesthetic.
+- **Modern Routing:** Active sidebar highlighting utilizing React Router DOM v6.
 
-| Layer | Technology |
-|-------|------------|
-| **Frontend** | React 18, Axios, CSS3 |
-| **Backend** | Node.js, Express.js |
-| **Styling** | Custom CSS with CSS Variables |
+---
 
-## 🚀 Quick Start
+## 🛠️ Tech Stack — MERN
 
-### Prerequisites
-- Node.js v14 or higher
-- npm or yarn
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **M** | MongoDB Atlas | Cloud database (persistent storage) |
+| **E** | Express.js 4 | REST API server |
+| **R** | React 18 | Frontend SPA |
+| **N** | Node.js | Backend runtime |
+| — | Mongoose | MongoDB ODM / schema validation |
+| — | bcryptjs | Password hashing |
+| — | jsonwebtoken | JWT auth tokens (7-day expiry) |
+| — | React Router DOM v6 | Client-side URL routing |
+| — | Axios | HTTP client with JWT interceptor |
+| — | dotenv | Environment variable management |
 
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/tharavad.git
-cd tharavad
-```
-
-2. **Setup Backend**
-```bash
-cd backend
-npm install
-cp .env.example .env
-npm start
-```
-Server runs on `http://localhost:5000`
-
-3. **Setup Frontend** (new terminal)
-```bash
-cd frontend
-npm install
-npm start
-```
-App opens on `http://localhost:3000`
-
-## 🔐 Demo Credentials
-
-```
-Username: admin
-Password: admin123
-```
+---
 
 ## 📁 Project Structure
 
 ```
 tharavad/
 ├── README.md
-├── .gitignore
-│
 ├── backend/
-│   ├── server.js          # Express API server
+│   ├── server.js          # Express API + Mongoose models + all routes
 │   ├── package.json
-│   ├── .env.example
-│   └── .gitignore
+│   ├── .env               # Secrets (Database URI, JWT secret)
+│   └── .env.example       # Template for env variables
 │
 └── frontend/
     ├── public/
-    │   └── index.html
-    ├── src/
-    │   ├── App.js         # Main component
-    │   ├── App.css        # All styles
-    │   ├── index.js       # Entry point
-    │   └── pages/
-    │       ├── Dashboard.js
-    │       ├── Members.js
-    │       ├── Payments.js
-    │       └── Search.js
-    ├── package.json
-    └── .gitignore
+    │   └── index.html     # Minimized HTML Shell
+    └── src/
+        ├── App.js         # Router, AuthContext, AppShell, LoginPage
+        ├── App.css        # Full design system (CSS variables, responsive media queries, animations)
+        ├── api.js         # Axios instance with auth headers
+        ├── index.js       # React entry point
+        └── pages/
+            ├── Dashboard.js   # Stats overview
+            ├── Members.js     # Member CRUD
+            ├── Payments.js    # Payment tracking
+            └── Search.js      # Cross-record search
 ```
-
-## 📡 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/auth/login` | Admin authentication |
-| `GET` | `/api/dashboard` | Dashboard statistics |
-| `GET` | `/api/members` | List all members |
-| `POST` | `/api/members` | Add new member |
-| `PUT` | `/api/members/:id` | Update member |
-| `GET` | `/api/payments` | List all payments |
-| `PUT` | `/api/payments/:id` | Update payment status |
-| `GET` | `/api/health` | Server health check |
-
-## 📸 Screenshots
-
-### Login Page
-Premium glassmorphism design with animated background
-
-### Dashboard
-Real-time statistics with progress tracking
-
-### Members Management
-Full CRUD operations with search & filter
-
-### Payment Tracking
-Year-wise payment status management
-
-## 🔮 Future Enhancements
-
-- [ ] Database integration (MongoDB/PostgreSQL)
-- [ ] JWT authentication
-- [ ] Payment receipt generation (PDF)
-- [ ] Email notifications
-- [ ] Data export (Excel/CSV)
-- [ ] Dashboard charts
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ---
 
-**Built with ❤️ for Tharavad Community**
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js v16+
+- A [MongoDB Atlas](https://cloud.mongodb.com) connection string (Free tier works perfectly)
+
+### 1. Set up Backend
+```bash
+cd backend
+npm install
+cp .env.example .env
+```
+
+Edit your `.env` file to include your MongoDB string:
+```env
+PORT=5000
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/tharavad?retryWrites=true&w=majority
+JWT_SECRET=super-secret-key-123
+```
+
+Start the backend:
+```bash
+npm start
+# Server will run on http://localhost:5000
+```
+
+### 2. Seed the Database (first time only)
+```bash
+# In an empty terminal / PowerShell
+Invoke-RestMethod -Uri "http://localhost:5000/api/seed" -Method Post
+```
+*This handles DB initialization, creating the admin user, 6 dummy members, and populated payments.*
+
+### 3. Set up Frontend
+```bash
+cd frontend
+npm install
+npm start
+# Frontend will launch on http://localhost:3000
+```
+
+---
+
+## 🔐 Default Credentials
+
+After seeding, access the dashboard at `http://localhost:3000/login` with:
+```
+Username: admin
+Password: admin123
+```
+
+> **Note:** Change these in production by updating the Admin document directly in your MongoDB Atlas cluster.
+
+---
+
+## 🤝 Contributing & License
+This project is open-source and available under the MIT License. Built with ❤️ for the Mullachery Tharavad Community.
